@@ -1,4 +1,7 @@
-import { detectCollision } from "./collisionDetection";
+import {
+  detectHorizontalCollision,
+  detectVerticalCollision,
+} from "./collisionDetection";
 
 export default class Ball {
   constructor(game) {
@@ -39,6 +42,10 @@ export default class Ball {
       this.game.lives--;
       this.reset();
     }
-    if (detectCollision(this, this.game.paddle)) this.speed.y = -this.speed.y;
+    if (detectHorizontalCollision(this, this.game.paddle))
+    this.speed.x = -this.speed.x;
+    
+    if (detectVerticalCollision(this, this.game.paddle))
+      this.speed.y = -this.speed.y;
   }
 }

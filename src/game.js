@@ -46,8 +46,6 @@ export default class Game {
   }
 
   update(deltaTime) {
-    if (this.lives === 0) this.gameState = GAMESTATE.GAMEOVER;
-
     if (
       this.gameState === GAMESTATE.PAUSED ||
       this.gameState === GAMESTATE.MENU ||
@@ -60,13 +58,17 @@ export default class Game {
       this.gameState = GAMESTATE.NEW_LEVEL;
       this.start();
     }
+
     livesDisplay.textContent = `Lives ${this.lives}`;
+
     [...this.gameObjects, ...this.bricks].forEach((object) =>
       object.update(deltaTime)
     );
+
     this.bricks = this.bricks.filter((brick) => !brick.markedForDeletion);
+    
+    if (this.lives === 0) this.gameState = GAMESTATE.GAMEOVER;
   }
-  s;
 
   draw(ctx) {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));

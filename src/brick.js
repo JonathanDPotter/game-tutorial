@@ -1,4 +1,7 @@
-import { detectCollision } from "./collisionDetection";
+import {
+  detectVerticalCollision,
+  detectHorizontalCollision,
+} from "./collisionDetection";
 
 export default class Brick {
   constructor(game, position) {
@@ -11,7 +14,12 @@ export default class Brick {
   }
 
   update() {
-    if (detectCollision(this.game.ball, this)) {
+    if (detectHorizontalCollision(this.game.ball, this)) {
+      this.game.ball.speed.x = -this.game.ball.speed.x;
+      this.markedForDeletion = true;
+    }
+    
+    if (detectVerticalCollision(this.game.ball, this)) {
       this.game.ball.speed.y = -this.game.ball.speed.y;
       this.markedForDeletion = true;
     }
