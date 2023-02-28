@@ -6,7 +6,7 @@
   "author": "Jonathan <jonathan.d.potter@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "dev": "webpack --watch --mode=development"
   },
   "devDependencies": {
